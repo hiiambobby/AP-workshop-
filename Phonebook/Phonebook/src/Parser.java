@@ -85,28 +85,39 @@ public class Parser {
     }
 
     private void handleShowCommand(String[] parts) {
+        String option;
         if (parts.length < 2) {
-            System.out.println("Invalid input for show command.");
-            return;
-        }
+            option = "";
 
-        String option = parts[1];
+        } else
+            option = parts[1];
 
         switch (option) {
-            // case "-g":
-            // if (parts.length < 4) {
-            // System.out.println("Invalid input for show -g command.");
-            // return;
-            // }
-            // String searchType = parts[2];
-            // String searchWord = parts[3];
-            // showBySearchType(searchType, searchWord);
-            // break;
+            case "-g":
+                String searchType = parts[2];
+                String searchWord = parts[3];
+                Contact[] foundContacts1 = phoneBook.findContact(searchWord);
+                if (foundContacts1.length == 0) {
+                    System.out.println("No contacts found");
+                } else {
+                    System.out.println("Found contacts:");
+                    for (Contact contact : foundContacts1) {
+                        // Manually print contact details
+                        System.out.println("[" + contact.getFirstName() + contact.getLastName() + "]");
+                        // System.out.println("Group: " + contact.getGroup());
+                        // System.out.println("Email: " + contact.getEmail());
+                        // System.out.println("Phone Number: " + contact.getPhoneNumber());
+                        // System.out.println("Address: " + contact.getAddress());
+                        System.out.println();
+                    }
+                }
+                break;
+
             case "-c":// search by firstname or lastname
                 String contactInfo = parts[2];
                 Contact[] foundContacts = phoneBook.findContact(contactInfo);
                 if (foundContacts.length == 0) {
-                    System.out.println("No contacts found matching the search criteria.");
+                    System.out.println("No contacts found");
                 } else {
                     System.out.println("Found contacts:");
                     for (Contact contact : foundContacts) {
@@ -121,8 +132,7 @@ public class Parser {
                 }
                 break;
             case "":
-                // Handle 'show' command without options
-                // showAllContacts();
+                phoneBook.printContacts();
                 break;
             default:
                 System.out.println("Invalid option for show command.");
