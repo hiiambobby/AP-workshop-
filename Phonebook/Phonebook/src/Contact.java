@@ -6,9 +6,8 @@ public class Contact {
     private Address address;
     private PhoneNumber phoneNumber;
 
-
-    public Contact( String firstName, String lastName,String group, String email,
-            PhoneNumber phoneNumber,Address address) {
+    public Contact(String firstName, String lastName, String group, String email,
+            PhoneNumber phoneNumber, Address address) {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -25,9 +24,11 @@ public class Contact {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    public void setGroup (String group) {
+
+    public void setGroup(String group) {
         this.group = group;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -50,6 +51,14 @@ public class Contact {
 
     public PhoneNumber getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getGroup() {
+        return group;
     }
 
     public void setPhoneNumber(PhoneNumber phoneNumber) {

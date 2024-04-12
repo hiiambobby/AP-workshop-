@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class Parser {
 
+    private PhoneBook phoneBook;
+
+    public Parser(PhoneBook phoneBook) {
+        this.phoneBook = phoneBook; // Store the PhoneBook instance
+    }
+
     public void parse(String input) {
         String[] parts = input.split("\\s+");
 
@@ -17,7 +23,7 @@ public class Parser {
                 handleContactsCommand(parts);
                 break;
             case "show":
-                //handleShowCommand(parts);
+                handleShowCommand(parts);
                 break;
             case "exit":
                 System.exit(0);
@@ -30,7 +36,6 @@ public class Parser {
 
     private void handleContactsCommand(String[] parts) {
         Scanner scan = new Scanner(System.in);
-        PhoneBook phoneBook = new PhoneBook();
         if (parts.length < 4) {
             System.out.println("Invalid input for contacts command.");
             return;
@@ -56,19 +61,19 @@ public class Parser {
                 String city = scan.nextLine();
                 System.out.println("Please enter contact's zipcode");
                 String zipcode = scan.nextLine();
+                // scan.close();
 
-                Address address = new Address(zipcode,country,city);
+                Address address = new Address(zipcode, country, city);
                 PhoneNumber phone = new PhoneNumber(countryCode, phoneNumber);
-                Contact contact = new Contact(firstName, lastName, group, email, phone,address);
+                Contact contact = new Contact(firstName, lastName, group, email, phone, address);
                 if (phoneBook.addContact(contact)) {
-                    System.out.println("Contact saved successfully!");}
+                    System.out.println("Contact saved successfully!");
+                }
                 break;
             case "-r":
-                if(phoneBook.deleteContact(firstName,lastName))
-                {
+                if (phoneBook.deleteContact(firstName, lastName)) {
                     System.out.println("Ok");
-                }
-                else
+                } else
                     System.out.println("not-found");
 
                 break;
@@ -78,15 +83,51 @@ public class Parser {
         }
     }
 
-    private void addContact(String firstName, String lastName) {
-        System.out.println("Adding contact: " + firstName + " " + lastName);
-        // Add your logic to handle adding a contact here
-    }
+    private void handleShowCommand(String[] parts) {
+        if (parts.length < 2) {
+            System.out.println("Invalid input for show command.");
+            return;
+        }
 
-    private void removeContact(String firstName, String lastName) {
-        System.out.println("Removing contact: " + firstName + " " + lastName);
-        // Add your logic to handle removing a contact here
-    }
+        String option = parts[1];
 
+        switch (option) {
+            // case "-g":
+            // if (parts.length < 4) {
+            // System.out.println("Invalid input for show -g command.");
+            // return;
+            // }
+            // String searchType = parts[2];
+            // String searchWord = parts[3];
+            // showBySearchType(searchType, searchWord);
+            // break;
+            case "-c":// search by firstname or lastname
+                String contactInfo = parts[2];
+                Contact[] foundContacts = phoneBook.findContact(contactInfo);
+                if (foundContacts.length == 0) {
+                    System.out.println("No contacts found matching the search criteria.");
+                } else {
+                    System.out.println("Found contacts:");
+                    for (Contact contact : foundContacts) {
+                        // Manually print contact details
+                        System.out.println("First Name: " + contact.getFirstName());
+                        System.out.println("Last Name: " + contact.getLastName());
+                        System.out.println("Group: " + contact.getGroup());
+                        System.out.println("Email: " + contact.getEmail());
+                        System.out.println("Phone Number: " + contact.getPhoneNumber());
+                        System.out.println("Address: " + contact.getAddress());
+                        System.out.println();
+                    }
+                }
+                break;
+            case "":
+                // Handle 'show' command without options
+                // showAllContacts();
+                break;
+            default:
+                System.out.println("Invalid option for show command.");
+                break;
+        }
+    }
 
 }
