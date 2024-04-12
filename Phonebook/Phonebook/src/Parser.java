@@ -41,15 +41,23 @@ public class Parser {
 
         switch (option) {
             case "-a":
-                Contact contact = new Contact();
-                
-                addContact(firstName, lastName);
                 System.out.println("Please enter contact's group: ");
                 String group = scan.nextLine();
-                contact.setGroup(group);
                 System.out.println("Please enter contact's email: ");
                 String email = scan.nextLine();
-                contact.setEmail(email);
+                System.out.println("Please enter country code: ");
+                String countryCode = scan.nextLine();
+                System.out.println("Please enter the 12-digit phone number:");
+                String phoneNumber = scan.nextLine();
+                System.out.println("Please enter contact's country");
+                String country = scan.nextLine();
+                System.out.println("Please enter contact's city");
+                String city = scan.nextLine();
+
+                Address address = new Address(countryCode,country,city);
+                PhoneNumber phone = new PhoneNumber(countryCode, phoneNumber);
+                Contact contact = new Contact(firstName, lastName, group, email, phone,address);
+
                 break;
             case "-r":
                 //removeContact(firstName, lastName);

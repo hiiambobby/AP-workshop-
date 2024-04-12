@@ -1,10 +1,12 @@
-public class Phonenumber {
+public class PhoneNumber {
     private String countryCode;
     private Character[] number = new Character[12];
-    public Phonenumber(String countryCode,Character number)
+    public PhoneNumber(String countryCode, String number)
     {
         this.countryCode = countryCode;
-        this.number = new Character[]{number};
+        for (int i = 0; i < number.length(); i++) {
+            this.number[i] = number.charAt(i);
+        }
     }
 
     public String getCountryCode() {
@@ -19,8 +21,10 @@ public class Phonenumber {
         this.countryCode = countryCode.toLowerCase();
     }
 
-    public void setNumber(Character number) {
-        this.number = new Character[]{number};
+    public void setNumber(String number) {
+       for (int i = 0; i < number.length(); i++) {
+            this.number[i] = number.charAt(i);
+        };
     }
 
     @Override

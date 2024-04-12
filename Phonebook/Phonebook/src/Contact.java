@@ -4,14 +4,11 @@ public class Contact {
     private String firstName;
     private String lastName;
     private Address address;
-    private Phonenumber phoneNumber;
+    private PhoneNumber phoneNumber;
 
-    public Contact() {
 
-    }
-
-    public Contact(String group, String email, String firstName, String lastName, Address address,
-            Phonenumber phoneNumber) {
+    public Contact( String firstName, String lastName,String group, String email,
+            PhoneNumber phoneNumber,Address address) {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -20,22 +17,43 @@ public class Contact {
         this.lastName = lastName;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
-
+    // Getters and setters
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-
-    }
-
-    public void setFirstname(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    public void setGroup (String group) {
+        this.group = group;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setLasttname(String lastName) {
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public PhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(PhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
 }
