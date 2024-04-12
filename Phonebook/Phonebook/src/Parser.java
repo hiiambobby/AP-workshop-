@@ -30,6 +30,7 @@ public class Parser {
 
     private void handleContactsCommand(String[] parts) {
         Scanner scan = new Scanner(System.in);
+        PhoneBook phoneBook = new PhoneBook();
         if (parts.length < 4) {
             System.out.println("Invalid input for contacts command.");
             return;
@@ -57,7 +58,8 @@ public class Parser {
                 Address address = new Address(countryCode,country,city);
                 PhoneNumber phone = new PhoneNumber(countryCode, phoneNumber);
                 Contact contact = new Contact(firstName, lastName, group, email, phone,address);
-
+                if (phoneBook.addContact(contact)) {
+                    System.out.println("Contact saved successfully!");}
                 break;
             case "-r":
                 //removeContact(firstName, lastName);
