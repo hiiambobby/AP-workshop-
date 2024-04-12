@@ -54,15 +54,23 @@ public class Parser {
                 String country = scan.nextLine();
                 System.out.println("Please enter contact's city");
                 String city = scan.nextLine();
+                System.out.println("Please enter contact's zipcode");
+                String zipcode = scan.nextLine();
 
-                Address address = new Address(countryCode,country,city);
+                Address address = new Address(zipcode,country,city);
                 PhoneNumber phone = new PhoneNumber(countryCode, phoneNumber);
                 Contact contact = new Contact(firstName, lastName, group, email, phone,address);
                 if (phoneBook.addContact(contact)) {
                     System.out.println("Contact saved successfully!");}
                 break;
             case "-r":
-                //removeContact(firstName, lastName);
+                if(phoneBook.deleteContact(firstName,lastName))
+                {
+                    System.out.println("Ok");
+                }
+                else
+                    System.out.println("not-found");
+
                 break;
             default:
                 System.out.println("Invalid option for contacts command.");

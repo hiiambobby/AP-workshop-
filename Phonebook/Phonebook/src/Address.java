@@ -3,10 +3,9 @@ public class Address {
     private String country;
     private String city;
 
-    public Address(String zipCode,String country,String city)
-    {
+    public Address(String zipCode, String country, String city) {
         this.city = city;
-        this.zipCode=zipCode;
+        this.zipCode = zipCode;
         this.country = country;
     }
 
@@ -34,5 +33,9 @@ public class Address {
         return zipCode.toLowerCase();
     }
 
+    @Override
+    public String toString() {
+        return (zipCode + ", " + country + ", " + city).toLowerCase();
+    }
 
 }
