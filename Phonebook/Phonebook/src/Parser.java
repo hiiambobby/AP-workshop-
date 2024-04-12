@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Parser {
@@ -53,7 +54,7 @@ public class Parser {
                 String email = scan.nextLine();
                 System.out.println("Please enter country code: ");
                 String countryCode = scan.nextLine();
-                System.out.println("Please enter the 12-digit phone number:");
+                System.out.println("Please enter the phone number:");
                 String phoneNumber = scan.nextLine();
                 System.out.println("Please enter contact's country");
                 String country = scan.nextLine();
@@ -110,12 +111,11 @@ public class Parser {
                     System.out.println("Found contacts:");
                     for (Contact contact : foundContacts) {
                         // Manually print contact details
-                        System.out.println("First Name: " + contact.getFirstName());
-                        System.out.println("Last Name: " + contact.getLastName());
-                        System.out.println("Group: " + contact.getGroup());
-                        System.out.println("Email: " + contact.getEmail());
-                        System.out.println("Phone Number: " + contact.getPhoneNumber());
-                        System.out.println("Address: " + contact.getAddress());
+                        System.out.println("[" + contact.getFirstName() + contact.getLastName() + "]");
+                        // System.out.println("Group: " + contact.getGroup());
+                        // System.out.println("Email: " + contact.getEmail());
+                        // System.out.println("Phone Number: " + contact.getPhoneNumber());
+                        // System.out.println("Address: " + contact.getAddress());
                         System.out.println();
                     }
                 }
