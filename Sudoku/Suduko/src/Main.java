@@ -1,3 +1,8 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Java program for above approach
@@ -109,18 +114,68 @@ public class Main {
     }
 
     // Driver Code
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        int[][] grid = new int[9][9];
-        Scanner scan = new Scanner(System.in);
-        for(int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                grid[i][j] = scan.nextInt();
+        FileReader fileIn = null;
+        FileWriter output = null;
+        Scanner scanner =null;
+
+        try {
+            System.out.println("Enter input file name : \"inputname.txt\"");
+            scanner = new Scanner(System.in);
+            String FileInput = scanner.nextLine();
+            System.out.println("Enter input file name : \"outputname.txt\"");
+            String outPutFile = scanner.nextLine();
+            fileIn = new FileReader(
+                    FileInput);
+            scanner = new Scanner(fileIn);
+
+            output = new FileWriter(outPutFile);
+
+            int[][] grid = new int[9][9];
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (scanner.hasNext())
+                        grid[i][j] = scanner.nextInt();
+                }
             }
+            if (solveSudoku(grid, 0, 0))
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        if (scanner.hasNext())
+                            output.write(Integer.toString(grid[i][j]) + " ");
+                    }
+                    output.write("\n");
+                }
+            else
+                System.out.println("No Solution exists");
         }
-        if (solveSudoku(grid, 0, 0))
-            print(grid);
-        else
-            System.out.println("No Solution exists");
-    }
+        catch(FileNotFoundException e) //read error
+        {
+            System.out.println("please enter a valid file name!!!");
+        }
+        catch(IOException e) //write error
+        {
+            System.out.println("error in output file!!!");
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("there is nothing in ur file");
+        }
+        catch(InputMismatchException e)
+        {
+            System.out.println("input file is in a wrong format!");
+        }
+        finally
+        {
+            if(output!= null) {
+                output.close();
+            if(scanner != null)
+                scanner.close();
+            if(fileIn != null)
+                fileIn.close();
+
+            }
+
+    }}
 }
