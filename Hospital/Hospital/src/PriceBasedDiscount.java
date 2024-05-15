@@ -1,11 +1,10 @@
 package src;
 
 public class PriceBasedDiscount extends Discount{
-    private int date;
-    private String id;
-    public PriceBasedDiscount(String id,int date)
+
+    public PriceBasedDiscount(String id,int date,String userName)
     {
-        super(id,date);
+        super(id,date,userName);
     }
 
 }

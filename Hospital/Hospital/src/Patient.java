@@ -31,9 +31,9 @@ public class Patient extends Person {
         System.out.println("Enter Date:(1-31):");
         int date = scan.nextInt();
         if(choice == 1)
-            Hospital.givePercentageDicount(date);
+            Hospital.givePercentageDicount(getUserName(),date);
         else if(choice == 2)
-            Hospital.givePriceBasedDiscount(date);
+            Hospital.givePriceBasedDiscount(getUserName(),date);
 
     }
 }

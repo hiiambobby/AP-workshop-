@@ -3,10 +3,12 @@ package src;
 public abstract class Discount {
     String id;
     int expiration;
-    public Discount(String id,int expiration)
+    String userId;
+    public Discount(String id,int expiration,String userId)
     {
         this.id = id;
         this.expiration = expiration;
+        this.userId = userId;
     }
 
     public void setId(String id) {
@@ -23,5 +25,18 @@ public abstract class Discount {
 
     public int getExpiration() {
         return expiration;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

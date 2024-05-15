@@ -54,18 +54,18 @@ public class Hospital {
         username = scan.nextLine();
         System.out.println("success");
     }
-    public static void givePercentageDicount(int date)
+    public static void givePercentageDicount(String userName,int date)
     {
         String id = "";
         int expitarionDate =  date + 7;
-        Discount discount = new PercentageDiscount("Per" + randomGeneratorString(id),expitarionDate);
+        Discount discount = new PercentageDiscount("Per" + randomGeneratorString(id),expitarionDate,userName);
 
     }
-    public static void givePriceBasedDiscount(int date)
+    public static void givePriceBasedDiscount(String userName,int date)
     {
         String id = "";
         int expitarionDate = date + 7;
-        Discount discount = new PriceBasedDiscount("Price" +randomGeneratorString(id),expitarionDate);
+        Discount discount = new PriceBasedDiscount("Price" +randomGeneratorString(id),expitarionDate,userName);
 
     }
     public static String randomGeneratorString(String ticketId)
