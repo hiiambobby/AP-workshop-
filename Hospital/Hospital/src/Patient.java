@@ -4,6 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Patient extends Person {
+    public Patient(String username, String password) {
+        super(username,password);
+    }
+
     public void menu() {
         Scanner scan = new Scanner(System.in);
         System.out.println("1.See Reservation Table");
@@ -11,6 +15,7 @@ public class Patient extends Person {
         System.out.println("3.Charge Account");
         System.out.println("4.Get Dicount Percentage Discount Ticket");
         System.out.println("5.Get Price Based Discount Ticket");
+        System.out.println("6.exit");
         int input = scan.nextInt();
         switch (input) {
             case 1:
@@ -23,6 +28,8 @@ public class Patient extends Person {
             case 5:
                 getDiscount(2);
                 break;
+            case 6:
+                Main.menu();
         }
     }
 

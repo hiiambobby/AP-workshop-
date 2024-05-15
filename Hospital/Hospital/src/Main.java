@@ -3,8 +3,9 @@ package src;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Hospital hospital = new Hospital();
+    public static void menu()
+    {            Hospital hospital = new Hospital();
+
         Scanner scan = new Scanner(System.in);
         while (true) {
             System.out.println("1.sign in as doctor");
@@ -15,5 +16,10 @@ public class Main {
             int input = scan.nextInt();
             hospital.showMenu(input);
         }
+    }
+    public static void main(String[] args) {
+
+        menu();
+
     }
 }

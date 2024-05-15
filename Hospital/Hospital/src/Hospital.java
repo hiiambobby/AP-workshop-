@@ -33,9 +33,15 @@ public class Hospital {
 
         switch (input) {
             case 1:
+                break;
+            case 2:
+                break;
+            case 3:
             {
                 getPatientInfo();
                 break;}
+            case 4:
+                break;
             case 5:
                 System.exit(0);
                 break;
@@ -51,8 +57,12 @@ public class Hospital {
         Scanner scan = new Scanner(System.in);
         username = scan.nextLine();
         System.out.println("password:");
-        username = scan.nextLine();
-        System.out.println("success");
+        password = scan.nextLine();
+        //System.out.println("success");
+        Patient patient = new Patient(username,password);
+        while(true)
+        {        patient.menu();
+        }
     }
     public static void givePercentageDicount(String userName,int date)
     {

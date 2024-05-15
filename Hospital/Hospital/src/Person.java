@@ -6,7 +6,9 @@ public class Person {
     private Hospital hospital;
     private String passWord;
 
-    public Person() {
+    public Person(String userName,String passWord) {
+        this.userName = userName;
+        this.passWord = passWord;
 
     }
 

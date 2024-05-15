@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 public class Doctor extends Person {
     ArrayList<String> availableDate = new ArrayList<>();
-
+    public Doctor(String userId,String passWord)
+    {
+        super(userId,passWord);
+    }
     public void menu() {
         Scanner scan = new Scanner(System.in);
         System.out.println("1.visits");
