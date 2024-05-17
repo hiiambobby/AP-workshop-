@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Hospital {
-    private static HashMap<String, ArrayList<Reserve>> reservations = new HashMap<>();
+    private static HashMap<String, String> reservations = new HashMap<>(); // Maps patient to doctor and day
     private static HashMap<String,ArrayList<String>> doctorDays = new HashMap<>();
     private static HashMap<String, Person> people = new HashMap<>();
 
@@ -18,7 +18,9 @@ public class Hospital {
         doctorDays.put(userId,days);
 
     }
-
+    public static void addReservation(String patientName, String doctorId, String day) {
+        reservations.put(patientName, "Doctor ID: " + doctorId + ", Day: " + day);
+    }
     public static HashMap<String, ArrayList<String>> getDoctorDays() {
         return doctorDays;
     }
