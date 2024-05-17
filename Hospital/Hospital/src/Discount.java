@@ -35,8 +35,11 @@ public abstract class Discount {
         this.userId = userId;
     }
 
-    @Override
     public String toString() {
-        return super.toString();
+        return "Discount{" +
+                "id='" + id + '\'' +
+                ", expirationDate=" + expiration +
+                ", userName='" + userId + '\'' +
+                '}';
     }
 }

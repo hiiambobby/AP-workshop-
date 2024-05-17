@@ -68,20 +68,19 @@ public class Hospital {
 
     }
 
-    public static void givePercentageDicount(PercentageDiscount discount,String userName,int date)
-    {
-        String id = "";
-        int expitarionDate =  date + 7;
-        discount = new PercentageDiscount("Per" + randomGeneratorString(id),expitarionDate,userName);
 
-    }
-    public static void givePriceBasedDiscount(PriceBasedDiscount discount,String userName,int date)
-    {
+    public static PercentageDiscount givePercentageDiscount(String userName, int date) {
         String id = "";
-        int expitarionDate = date + 7;
-        discount = new PriceBasedDiscount("Price" +randomGeneratorString(id),expitarionDate,userName);
-
+        int expirationDate = date + 7;
+        return new PercentageDiscount("Per" + randomGeneratorString(id), expirationDate, userName);
     }
+
+    public static PriceBasedDiscount givePriceBasedDiscount(String userName, int date) {
+        String id = "";
+        int expirationDate = date + 7;
+        return new PriceBasedDiscount("Price" + randomGeneratorString(id), expirationDate, userName);
+    }
+
     public static String randomGeneratorString(String ticketId)
     {
         int leftLimit = 48; // numeral '0'

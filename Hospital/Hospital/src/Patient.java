@@ -47,22 +47,20 @@ public class Patient extends Person {
 
     }
 
-    public void getDiscount(int choice){
+    public void getDiscount(int choice) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Date:(1-31):");
-        PercentageDiscount percen = null ;
-        PriceBasedDiscount price = null ;
+        System.out.println("Enter Date (1-31):");
         int date = scan.nextInt();
-        if(choice == 1) {
-            Hospital.givePercentageDicount(percen,getUserName(), date);
-            System.out.println("Your ticket is:");
-            System.out.println(percen.toString());
-        }
-        else if(choice == 2){
-            Hospital.givePriceBasedDiscount(price,getUserName(),date);
-        System.out.println("Your ticket is:");
-        System.out.println(price.toString());}
 
+        if (choice == 1) {
+            PercentageDiscount percen = Hospital.givePercentageDiscount(getUserName(), date);
+            System.out.println("Your ticket is:");
+            System.out.println(percen);
+        } else if (choice == 2) {
+            PriceBasedDiscount price = Hospital.givePriceBasedDiscount(getUserName(), date);
+            System.out.println("Your ticket is:");
+            System.out.println(price);
+        }
     }
     private void chargeAccount(){
         Scanner scan = new Scanner(System.in);
