@@ -1,5 +1,6 @@
 package src;
 
+import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ public class Hospital {
     }
     public static HashMap<String, ArrayList<String>> getDoctorDays() {
         return doctorDays;
+    }
+
+    public static HashMap<String, String> getReservations() {
+        return reservations;
     }
 
     public static HashMap<String, Person> getPeople() {

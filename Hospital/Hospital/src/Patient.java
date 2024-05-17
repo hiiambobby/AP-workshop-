@@ -79,7 +79,7 @@ public class Patient extends Person {
         }
 
         System.out.println("Available Doctors and their Days:");
-        int i = 1; // Starting index from 1 for better readability
+        int i = 1;
         for (Map.Entry<String, ArrayList<String>> entry : Hospital.getDoctorDays().entrySet()) {
             String doctorId = entry.getKey();
             ArrayList<String> days = entry.getValue();
@@ -97,7 +97,7 @@ public class Patient extends Person {
 
         System.out.println("Enter the number corresponding to the doctor you want to reserve:");
         int doctorIndex = scan.nextInt();
-        scan.nextLine();  // Consume newline
+        scan.nextLine();
 
         HashMap<String, ArrayList<String>> doctorDays = Hospital.getDoctorDays();
         String selectedDoctorId = null;
