@@ -1,7 +1,7 @@
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
-
 public class Client {
     public static void main(String[] args) {
         Socket socket = null;
@@ -18,61 +18,72 @@ public class Client {
             bufferedWriter = new BufferedWriter(outputStreamWriter);
             Scanner scanner = new Scanner(System.in);
 
-            while (true) {
+            System.out.println("Enter input file name: \"inputname.txt\"");
+            String inputFileName = scanner.nextLine();
+            int[][] unsolvedGrid = new int[9][9];
 
-                System.out.println("Enter input file name: \"inputname.txt\"");
-                String inputFileName = scanner.nextLine();
-                System.out.println("Enter output file name: \"outputname.txt\"");
-                String outputFileName = scanner.nextLine();
-                int[][] grid = new int[9][9];
-                try (Scanner fileScanner = new Scanner(new FileReader(inputFileName))) {
-                    for (int i = 0; i < 9; i++) {
-                        for (int j = 0; j < 9; j++) {
-                            if (fileScanner.hasNextInt()) {
-                                grid[i][j] = fileScanner.nextInt();
-                            }
+            // Read the unsolved Sudoku puzzle from the file
+            try (Scanner fileScanner = new Scanner(new FileReader(inputFileName))) {
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        if (fileScanner.hasNextInt()) {
+                            unsolvedGrid[i][j] = fileScanner.nextInt();
                         }
                     }
-                } catch (FileNotFoundException e) {
-                    System.out.println("Input file not found!");
-                    return;
                 }
-
-                bufferedWriter.write(message);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-
-                System.out.println("System: " + bufferReader.readLine());
-
-                if (message.equalsIgnoreCase("fuck")) {
-                    break;
-                }
-
+            } catch (FileNotFoundException e) {
+                System.out.println("Input file not found!");
+                return;
             }
+
+            // Display the unsolved Sudoku puzzle to the user
+            System.out.println("Unsolved Sudoku:");
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    System.out.print(unsolvedGrid[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+            // User inputs the solved Sudoku puzzle
+            int[][] solvedGrid = new int[9][9];
+            System.out.println("Enter the solved Sudoku puzzle:");
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    solvedGrid[i][j] = scanner.nextInt();
+                }
+            }
+
+            // Send the solved Sudoku puzzle to the server
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    bufferedWriter.write(solvedGrid[i][j] + " ");
+                }
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.flush();
+
+            // Receive the validation result from the server
+            String response = bufferReader.readLine();
+            System.out.println("Server: " + response);
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
                 if (socket != null)
                     socket.close();
-
                 if (inputStreamReader != null)
                     inputStreamReader.close();
-
                 if (outputStreamWriter != null)
                     outputStreamWriter.close();
-
                 if (bufferReader != null)
                     bufferReader.close();
-
                 if (bufferedWriter != null)
                     bufferedWriter.close();
-
             } catch (IOException e) {
                 e.printStackTrace();
-
             }
         }
-
     }
 }
