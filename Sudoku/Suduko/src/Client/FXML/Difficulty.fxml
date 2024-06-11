@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="difficultyBox" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.DifController">
+<VBox fx:id="difficultyBox" alignment="CENTER" prefHeight="485.0" prefWidth="417.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.DifController">
     <children>
-        <Button fx:id="easyButton" mnemonicParsing="false" onAction="#easyButtonPressed" text="Easy" />
-        <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#mediumButtonPressed" text="Medium" />
-        <Button fx:id="hardButton" mnemonicParsing="false" onAction="#hardButtonPressed" text="Hard" />
-        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" />
+      <AnchorPane prefHeight="378.0" prefWidth="619.0">
+          <children>
+              <Button fx:id="easyButton" alignment="CENTER" layoutX="120.0" layoutY="50.0" mnemonicParsing="false" onAction="#easyButtonPressed" styleClass="button-base" text="Easy" />
+              <Button fx:id="mediumButton" alignment="CENTER" layoutX="120.0" layoutY="100.0" mnemonicParsing="false" onAction="#mediumButtonPressed" styleClass="button-base" text="Medium" />
+              <Button fx:id="hardButton" alignment="CENTER" layoutX="120.0" layoutY="150.0" mnemonicParsing="false" onAction="#hardButtonPressed" styleClass="button-base" text="Hard" />
+              <Button fx:id="backButton" alignment="CENTER" layoutX="120.0" layoutY="200.0" mnemonicParsing="false" onAction="#backButtonPressed" styleClass="button-base" text="Back" />
+          </children>
+      </AnchorPane>
     </children>
 </VBox>

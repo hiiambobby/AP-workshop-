@@ -108,7 +108,7 @@ public class SudokuGridController {
                 fileName = "hard";
                 break;
         }
-        
+
 
         try (InputStream is = getClass().getResourceAsStream("/Tables/" + fileName+".txt");
              Scanner scanner = new Scanner(is)) {
@@ -227,6 +227,7 @@ public class SudokuGridController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(newScene));
             Parent root = loader.load();
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("FXML/Style.css").toExternalForm()); // Add this line
             Stage primaryStage = (Stage) backButton.getScene().getWindow();
             primaryStage.setScene(scene);
             primaryStage.show();

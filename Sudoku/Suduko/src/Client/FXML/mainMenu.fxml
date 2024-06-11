@@ -6,8 +6,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="417.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.MenuController">
     <children>
-        <Button fx:id="startButton" layoutX="171.0" layoutY="230.0" mnemonicParsing="false" onAction="#startSelected" prefHeight="11.0" prefWidth="60.0" text="start" />
-        <Button fx:id="exitButton" layoutX="171.0" layoutY="298.0" mnemonicParsing="false" onAction="#exitSelected" prefHeight="17.0" prefWidth="60.0" text="exit" />
+        <Button fx:id="startButton" layoutX="150.0" layoutY="230.0" mnemonicParsing="false" onAction="#startSelected" prefHeight="11.0" prefWidth="60.0" text="start" />
+        <Button fx:id="exitButton" layoutX="150.0" layoutY="298.0" mnemonicParsing="false" onAction="#exitSelected" prefHeight="17.0" prefWidth="60.0" text="exit" />
       <Label fx:id="header" layoutX="1.0" layoutY="111.0" prefHeight="17.0" prefWidth="417.0" text="Welcome to Sudoku Game!" />
     </children>
 </Pane>

@@ -34,6 +34,7 @@ public class MenuController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("FXML/Difficulty.fxml"));
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("FXML/Style.css").toExternalForm()); // Add this line
             Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             primaryStage.setScene(scene);
             primaryStage.show();
