@@ -3,6 +3,7 @@ package Client;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -107,15 +108,15 @@ public class SudokuGridController {
                 fileName = "hard";
                 break;
         }
-        fileName = String.format("C:\\Users\\samei\\AP_LAB\\ApLab-By-Saba-Seyed-tabaei\\Sudoku\\Suduko\\src\\Tables/%s.txt", fileName);
-        Font boldFont = Font.font("Arial", FontWeight.BOLD, 13);
-        try {
-            File file = new File(fileName);
-            Scanner scanner = new Scanner(file);
-            int readNumber;
+        
+
+        try (InputStream is = getClass().getResourceAsStream("/Tables/" + fileName+".txt");
+             Scanner scanner = new Scanner(is)) {
+
+            Font boldFont = Font.font("Arial", FontWeight.BOLD, 13);
             for (int i = 0; i < rank; i++) {
                 for (int j = 0; j < rank; j++) {
-                    readNumber = scanner.nextInt();
+                    int readNumber = scanner.nextInt();
                     if (readNumber != 0) {
                         textFields[i][j].setFont(boldFont);
                         textFields[i][j].setText("" + readNumber);
@@ -123,11 +124,11 @@ public class SudokuGridController {
                     }
                 }
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     private void changeDuplicatesColor(int currentRow, int currentColumn, String oldText, String newText) {
         if (newText.equals(oldText)) {
