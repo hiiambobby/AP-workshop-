@@ -3,6 +3,9 @@ package Client;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+
+
+
 public class Client {
     public static void main(String[] args) {
         Socket socket = null;
@@ -12,25 +15,28 @@ public class Client {
         BufferedWriter bufferedWriter = null;
 
         try {
-            socket = new Socket("LocalHost", 1234);
+            socket = new Socket("localhost", 1234);
             inputStreamReader = new InputStreamReader(socket.getInputStream());
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
             bufferReader = new BufferedReader(inputStreamReader);
             bufferedWriter = new BufferedWriter(outputStreamWriter);
             Scanner scanner = new Scanner(System.in);
 
-<<<<<<< HEAD
-
-            // getting sudoku from server
-            System.out.println("choose difficulty level: 1.easy 2.medium 3.hard");
-            String level = scanner.nextLine();
-            if (!level.equals("1") && !level.equals("2") && !level.equals("3")){
-                System.out.println("wrong input");
-                return;}
-            bufferedWriter.write(Integer.parseInt(level));
+            System.out.println("Enter game level (easy, medium, hard):");
+            String difficultyLevel = scanner.nextLine();
+            bufferedWriter.write(difficultyLevel);
+            bufferedWriter.newLine();
             bufferedWriter.flush();
 
-            // receiving sudoku from server
+            // Receive the response from the server
+            String response = bufferReader.readLine();
+
+            if (response.equals("Invalid difficulty level.") || response.equals("Sudoku puzzle file not found.")) {
+                System.out.println("Server: " + response);
+                return;  // Exit if there was an error
+            }
+
+            // Receive the unsolved Sudoku puzzle from the server
             int[][] unsolvedGrid = new int[9][9];
             for (int i = 0; i < 9; i++) {
                 String[] line = bufferReader.readLine().split(" ");
@@ -38,48 +44,6 @@ public class Client {
                     unsolvedGrid[i][j] = Integer.parseInt(line[j]);
                 }
             }
-=======
-            //
-            //System.out.println("Enter input file name: \"inputname.txt\"");
-            //String inputFileName = scanner.nextLine();
-            //int[][] unsolvedGrid = new int[9][9];
-            //
-
-            // getting sudoku from server
-            System.out.println("choose difficulty level: 1.easy 2.medium 3.hard");
-            String level = scanner.nextLine();
-            if (!level.equals("1") && !level.equals("2") && !level.equals("3")){
-                System.out.println("wrong input");
-                return;}
-            bufferedWriter.write(Integer.parseInt(level));
-            bufferedWriter.flush();
-
-            // receiving sudoku from server
-            int[][] unsolvedGrid = new int[9][9];
-            for (int i = 0; i < 9; i++) {
-                String[] line = bufferReader.readLine().split(" ");
-                for (int j = 0; j < 9; j++) {
-                    unsolvedGrid[i][j] = Integer.parseInt(line[j]);
-                }
-            }
-
-            // Read the unsolved Sudoku puzzle from the file
-            /*try (Scanner fileScanner = new Scanner(new FileReader(inputFileName))) {
-                for (int i = 0; i < 9; i++) {
-                    for (int j = 0; j < 9; j++) {
-                        if (fileScanner.hasNextInt()) {
-                            unsolvedGrid[i][j] = fileScanner.nextInt();
-                        }
-                    }
-                }
-            } catch (FileNotFoundException e) {
-                System.out.println("Input file not found!");
-                return;
-            }*/
-
-
->>>>>>> b1dfe069a22e93e00e53770e923a973f3ce5e151
-
 
             // Display the unsolved Sudoku puzzle to the user
             System.out.println("Unsolved Sudoku:");
@@ -100,16 +64,18 @@ public class Client {
             }
 
             // Send the solved Sudoku puzzle to the server
+            StringBuilder solvedLineToSend = new StringBuilder();
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    bufferedWriter.write(solvedGrid[i][j] + " ");
+                    solvedLineToSend.append(solvedGrid[i][j]).append(" ");
                 }
-                bufferedWriter.newLine();
             }
+            bufferedWriter.write(solvedLineToSend.toString().trim());
+            bufferedWriter.newLine();
             bufferedWriter.flush();
 
             // Receive the validation result from the server
-            String response = bufferReader.readLine();
+            response = bufferReader.readLine();
             System.out.println("Server: " + response);
 
         } catch (IOException e) {

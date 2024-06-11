@@ -5,8 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Server {
 
+public class Server {
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(1234)) {
             System.out.println("Sudoku server started, waiting for client...");
@@ -21,16 +21,44 @@ public class Server {
 
                     // Read the difficulty level from the client
                     String difficultyLevel = bufferReader.readLine();
-                    String fileName;
+                    String sudokuPuzzle;
+
                     switch (difficultyLevel.toLowerCase()) {
                         case "easy":
-                            fileName = "easy.txt";
+                            sudokuPuzzle =
+                                    "0 0 6 0 0 0 5 0 8\n" +
+                                            "1 0 2 3 8 0 0 0 4\n" +
+                                            "0 0 0 2 0 0 1 9 0\n" +
+                                            "0 0 0 0 6 3 0 4 5\n" +
+                                            "0 6 3 4 0 5 8 7 0\n" +
+                                            "5 4 0 9 2 0 0 0 0\n" +
+                                            "0 8 7 0 0 4 0 0 0\n" +
+                                            "2 0 0 0 9 8 4 0 7\n" +
+                                            "4 0 9 0 0 0 3 0 0";
                             break;
                         case "medium":
-                            fileName = "medium.txt";
+                            sudokuPuzzle =
+                                    "0 0 0 0 0 0 0 9 0\n" +
+                                            "0 0 0 1 9 0 0 0 0\n" +
+                                            "0 0 7 0 0 8 0 0 0\n" +
+                                            "0 5 0 0 0 0 0 8 0\n" +
+                                            "0 1 0 0 0 7 0 0 3\n" +
+                                            "0 0 4 3 0 0 6 0 0\n" +
+                                            "6 8 0 0 0 0 0 0 2\n" +
+                                            "4 0 0 9 0 0 0 0 0\n" +
+                                            "0 0 0 0 0 1 0 0 0";
                             break;
                         case "hard":
-                            fileName = "hard.txt";
+                            sudokuPuzzle =
+                                    "5 0 0 0 0 0 0 8 0\n" +
+                                            "0 7 8 4 0 3 0 0 0\n" +
+                                            "1 0 0 0 0 0 3 0 0\n" +
+                                            "0 0 0 0 3 0 0 0 0\n" +
+                                            "0 0 0 0 0 0 0 0 9\n" +
+                                            "2 3 0 0 0 1 0 0 0\n" +
+                                            "0 0 6 0 0 0 0 5 0\n" +
+                                            "0 0 0 0 5 0 0 7 0\n" +
+                                            "0 0 0 0 4 8 0 0 0";
                             break;
                         default:
                             bufferedWriter.write("Invalid difficulty level.");
@@ -39,38 +67,23 @@ public class Server {
                             continue;
                     }
 
-                    // Read the unsolved Sudoku puzzle from the file
-                    int[][] unsolvedGrid = new int[9][9];
-                    try (Scanner fileScanner = new Scanner(new FileReader(fileName))) {
-                        for (int i = 0; i < 9; i++) {
-                            for (int j = 0; j < 9; j++) {
-                                if (fileScanner.hasNextInt()) {
-                                    unsolvedGrid[i][j] = fileScanner.nextInt();
-                                }
-                            }
-                        }
-                    } catch (FileNotFoundException e) {
-                        bufferedWriter.write("Sudoku puzzle file not found.");
-                        bufferedWriter.newLine();
-                        bufferedWriter.flush();
-                        continue;
-                    }
-
-                    // Send the unsolved Sudoku puzzle to the client
-                    for (int i = 0; i < 9; i++) {
-                        for (int j = 0; j < 9; j++) {
-                            bufferedWriter.write(unsolvedGrid[i][j] + " ");
-                        }
+                    // Send the Sudoku puzzle to the client
+                    String[] lines = sudokuPuzzle.split("\n");
+                    for (String line : lines) {
+                        bufferedWriter.write(line);
                         bufferedWriter.newLine();
                     }
                     bufferedWriter.flush();
 
+
                     // Receive the solved Sudoku puzzle from the client
                     int[][] solvedGrid = new int[9][9];
+                    String[] solvedLine = bufferReader.readLine().split(" ");
+                    int index = 0;
                     for (int i = 0; i < 9; i++) {
-                        String[] line = bufferReader.readLine().split(" ");
                         for (int j = 0; j < 9; j++) {
-                            solvedGrid[i][j] = Integer.parseInt(line[j]);
+                            solvedGrid[i][j] = Integer.parseInt(solvedLine[index]);
+                            index++;
                         }
                     }
 
@@ -109,6 +122,8 @@ public class Server {
             e.printStackTrace();
         }
     }
+
+
 
 
    static class SudokuVerifier {
