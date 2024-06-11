@@ -1,8 +1,9 @@
 package Client;
 
-import java.io.*;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -107,41 +108,15 @@ public class SudokuGridController {
                 fileName = "hard";
                 break;
         }
-        //new version
-        try(Socket socket = new Socket("localhost", 1234);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
-            InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
-            BufferedReader bufferReader = new BufferedReader(inputStreamReader);
-            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
-            Scanner scanner = new Scanner(System.in)){
 
-            bufferedWriter.write(difficulty);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
 
-            // Receive the response from the server
-            /*String response = bufferReader.readLine();
-
-            if (response.equals("Invalid difficulty level.") || response.equals("Sudoku puzzle file not found.")) {
-                System.out.println("Server: " + response);
-                //should be replaced with error popUp
-                return;  // Exit if there was an error
-            }*/
-
-            // receiving sudoku from server
-            int[][] unsolvedGrid = new int[9][9];
-            for (int i = 0; i < 9; i++) {
-                String[] line = bufferReader.readLine().split(" ");
-                //String[] line = bufferReader.readLine().split(" ");
-                for (int j = 0; j < 9; j++) {
-                    unsolvedGrid[i][j] = Integer.parseInt(line[j]);
-                }
-            }
+        try (InputStream is = getClass().getResourceAsStream("/Tables/" + fileName+".txt");
+             Scanner scanner = new Scanner(is)) {
 
             Font boldFont = Font.font("Arial", FontWeight.BOLD, 13);
             for (int i = 0; i < rank; i++) {
                 for (int j = 0; j < rank; j++) {
-                    int readNumber = unsolvedGrid[i][j];
+                    int readNumber = scanner.nextInt();
                     if (readNumber != 0) {
                         textFields[i][j].setFont(boldFont);
                         textFields[i][j].setText("" + readNumber);
@@ -149,8 +124,6 @@ public class SudokuGridController {
                     }
                 }
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -254,6 +227,7 @@ public class SudokuGridController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(newScene));
             Parent root = loader.load();
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("FXML/Style.css").toExternalForm()); // Add this line
             Stage primaryStage = (Stage) backButton.getScene().getWindow();
             primaryStage.setScene(scene);
             primaryStage.show();
