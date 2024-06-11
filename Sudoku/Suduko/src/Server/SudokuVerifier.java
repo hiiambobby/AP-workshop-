@@ -90,7 +90,7 @@ public class SudokuVerifier {
         return false;
     }
 
-    // Converts two dimensional array to a single dimensional array
+    // Converts two-dimensional array to a single dimensional array
     public int[] gridToArrayConverter(int i, int j, int[][] array) {
         int[] result = new int[ROW_LENGTH];
         int resultIndex = 0;

@@ -19,64 +19,51 @@ public class Server {
 
                     System.out.println("Client connected");
 
-                    // Read the difficulty level from the client
-                    String difficultyLevel = bufferReader.readLine();
-                    String sudokuPuzzle;
-
-                    switch (difficultyLevel.toLowerCase()) {
-                        case "easy":
-                            sudokuPuzzle =
-                                    "0 0 6 0 0 0 5 0 8\n" +
-                                            "1 0 2 3 8 0 0 0 4\n" +
-                                            "0 0 0 2 0 0 1 9 0\n" +
-                                            "0 0 0 0 6 3 0 4 5\n" +
-                                            "0 6 3 4 0 5 8 7 0\n" +
-                                            "5 4 0 9 2 0 0 0 0\n" +
-                                            "0 8 7 0 0 4 0 0 0\n" +
-                                            "2 0 0 0 9 8 4 0 7\n" +
-                                            "4 0 9 0 0 0 3 0 0";
+                    // receive difficulty level
+                    int level = bufferReader.read();
+                    String inputFileName;
+                    int[][] unsolvedGrid = new int[9][9];
+                    String localDir = System.getProperty("user.dir");
+                    switch (level){
+                        case 0:
+                            inputFileName = localDir + "\\src\\Tables\\easy.txt";
+                            System.out.println("level received");
                             break;
-                        case "medium":
-                            sudokuPuzzle =
-                                    "0 0 0 0 0 0 0 9 0\n" +
-                                            "0 0 0 1 9 0 0 0 0\n" +
-                                            "0 0 7 0 0 8 0 0 0\n" +
-                                            "0 5 0 0 0 0 0 8 0\n" +
-                                            "0 1 0 0 0 7 0 0 3\n" +
-                                            "0 0 4 3 0 0 6 0 0\n" +
-                                            "6 8 0 0 0 0 0 0 2\n" +
-                                            "4 0 0 9 0 0 0 0 0\n" +
-                                            "0 0 0 0 0 1 0 0 0";
+                        case 1:
+                            inputFileName = localDir + "\\src\\Tables\\medium.txt";
+                            System.out.println("level received");
                             break;
-                        case "hard":
-                            sudokuPuzzle =
-                                    "5 0 0 0 0 0 0 8 0\n" +
-                                            "0 7 8 4 0 3 0 0 0\n" +
-                                            "1 0 0 0 0 0 3 0 0\n" +
-                                            "0 0 0 0 3 0 0 0 0\n" +
-                                            "0 0 0 0 0 0 0 0 9\n" +
-                                            "2 3 0 0 0 1 0 0 0\n" +
-                                            "0 0 6 0 0 0 0 5 0\n" +
-                                            "0 0 0 0 5 0 0 7 0\n" +
-                                            "0 0 0 0 4 8 0 0 0";
+                        case 2:
+                            inputFileName = localDir + "\\src\\Tables\\hard.txt";
+                            System.out.println("level received");
                             break;
                         default:
-                            bufferedWriter.write("Invalid difficulty level.");
-                            bufferedWriter.newLine();
-                            bufferedWriter.flush();
-                            continue;
+                            inputFileName = "";
+                            System.out.println("level not received");
+                    }
+                    try (Scanner fileScanner = new Scanner(new FileReader(inputFileName))) {
+                        for (int i = 0; i < 9; i++) {
+                            for (int j = 0; j < 9; j++) {
+                                if (fileScanner.hasNextInt()) {
+                                    unsolvedGrid[i][j] = fileScanner.nextInt();
+                                }
+                            }
+                        }
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Input file not found!");
+                        return;
                     }
 
-                    // Send the Sudoku puzzle to the client
-                    String[] lines = sudokuPuzzle.split("\n");
-                    for (String line : lines) {
-                        bufferedWriter.write(line);
+                    // send sudoku to client
+                    for (int i = 0; i < 9; i++) {
+                        for (int j = 0; j < 9; j++) {
+                            bufferedWriter.write(unsolvedGrid[i][j] + " ");
+                        }
                         bufferedWriter.newLine();
+                        bufferedWriter.flush();
                     }
-                    bufferedWriter.flush();
 
-
-                    // Receive the solved Sudoku puzzle from the client
+                    /*// Receive the solved Sudoku puzzle from the client
                     int[][] solvedGrid = new int[9][9];
                     String[] solvedLine = bufferReader.readLine().split(" ");
                     int index = 0;
@@ -115,7 +102,7 @@ public class Server {
 
                     bufferedWriter.write(message);
                     bufferedWriter.newLine();
-                    bufferedWriter.flush();
+                    bufferedWriter.flush();*/
                 }
             }
         } catch (IOException e) {
@@ -212,7 +199,7 @@ public class Server {
             return false;
         }
 
-        // Converts two dimensional array to a single dimensional array
+        // Converts two-dimensional array to a single dimensional array
         public int[] gridToArrayConverter(int i, int j, int[][] array) {
             int[] result = new int[ROW_LENGTH];
             int resultIndex = 0;

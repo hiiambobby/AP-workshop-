@@ -23,7 +23,7 @@ public class Client {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Enter game level (easy, medium, hard):");
-            String difficultyLevel = scanner.nextLine();
+            int difficultyLevel = scanner.nextInt();
             bufferedWriter.write(difficultyLevel);
             bufferedWriter.newLine();
             bufferedWriter.flush();
@@ -39,11 +39,15 @@ public class Client {
             // Receive the unsolved Sudoku puzzle from the server
             int[][] unsolvedGrid = new int[9][9];
             for (int i = 0; i < 9; i++) {
-                String[] line = bufferReader.readLine().split(" ");
+                String temp = bufferReader.readLine();
+                System.out.println(temp);
+                String[] line = temp.split(" ");
                 for (int j = 0; j < 9; j++) {
                     unsolvedGrid[i][j] = Integer.parseInt(line[j]);
                 }
             }
+
+
 
             // Display the unsolved Sudoku puzzle to the user
             System.out.println("Unsolved Sudoku:");
