@@ -3,6 +3,7 @@ package Server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Server {
 
@@ -19,6 +20,49 @@ public class Server {
                                 new OutputStreamWriter(clientSocket.getOutputStream()))) {
 
                     System.out.println("Client connected");
+
+                    // getting sudoku info
+                    int level = bufferReader.read();
+                    String inputFileName;
+                    int[][] unsolvedGrid = new int[9][9];
+                    switch (level){
+                        case 1:
+                            inputFileName = "easy.txt";
+                            System.out.println("level received");
+                            break;
+                        case 2:
+                            inputFileName = "medium.txt";
+                            System.out.println("level received");
+                            break;
+                        case 3:
+                            inputFileName = "hard.txt";
+                            System.out.println("level received");
+                            break;
+                        default:
+                            inputFileName = "";
+                            System.out.println("level not received");
+                    }
+                    try (Scanner fileScanner = new Scanner(new FileReader(inputFileName))) {
+                        for (int i = 0; i < 9; i++) {
+                            for (int j = 0; j < 9; j++) {
+                                if (fileScanner.hasNextInt()) {
+                                    unsolvedGrid[i][j] = fileScanner.nextInt();
+                                }
+                            }
+                        }
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Input file not found!");
+                        return;
+                    }
+                    // sending sudoku
+                    for (int i = 0; i < 9; i++) {
+                        for (int j = 0; j < 9; j++) {
+                            bufferedWriter.write(unsolvedGrid[i][j] + " ");
+                        }
+                        bufferedWriter.newLine();
+                    }
+                    bufferedWriter.flush();
+                    //
 
                     int[][] grid = new int[9][9];
                     for (int i = 0; i < 9; i++) {
