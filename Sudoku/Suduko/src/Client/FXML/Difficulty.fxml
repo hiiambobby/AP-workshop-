@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="417.0" type="Pane" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.DifController">
+<VBox fx:id="difficultyBox" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.DifController">
     <children>
-        <Button fx:id="easyButton" layoutX="188.0" layoutY="170.0" mnemonicParsing="false" onAction="#easyButtonPressed" text="easy" />
-        <Text layoutX="169.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="select difficulty" />
-        <Button fx:id="backButton" layoutX="187.0" layoutY="319.0" mnemonicParsing="false" onAction="#backButtonPressed" text="back" />
-        <Button fx:id="hardButton" layoutX="189.0" layoutY="243.0" mnemonicParsing="false" onAction="#hardButtonPressed" text="hard" />
-        <Button fx:id="mediumButton" layoutX="178.0" layoutY="206.0" mnemonicParsing="false" onAction="#mediumButtonPressed" text="medium" />
+        <Button fx:id="easyButton" mnemonicParsing="false" onAction="#easyButtonPressed" text="Easy" />
+        <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#mediumButtonPressed" text="Medium" />
+        <Button fx:id="hardButton" mnemonicParsing="false" onAction="#hardButtonPressed" text="Hard" />
+        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" />
     </children>
-</fx:root>
+</VBox>
