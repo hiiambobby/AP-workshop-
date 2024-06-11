@@ -67,7 +67,7 @@
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 5,0,0,1 );
 }
 /* Difficulty button style */
-.difficulty-button {
+#easyButton {
     -fx-background-color: #0078d4;
     -fx-font-size: 16px;
     -fx-text-fill: white;
@@ -75,4 +75,19 @@
     -fx-pref-height: 40px;
 }
 
-/* Add more styles for other components as needed */
+#hardButton{
+    -fx-background-color: #0078d4;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 40px;
+}
+#mediumButton{
+    -fx-background-color: #0078d4;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 40px;
+}
+
+

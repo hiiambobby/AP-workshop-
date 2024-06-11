@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import javafx.scene.Node;
+
 
 public class DifController {
 
@@ -21,48 +23,57 @@ public class DifController {
     private Button easyButton;
 
     @FXML
+    private Button hardButton;
+
+    @FXML
     private Button mediumButton;
 
     @FXML
-    private Button hardButton;
-
-    private Object changeScene(String newScene) {
+    void backButtonPressed(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(newScene));
-            Parent root = loader.load();
+            Parent root = FXMLLoader.load(getClass().getResource("FXML/mainMenu.fxml"));
             Scene scene = new Scene(root);
-            Stage primaryStage = (Stage) backButton.getScene().getWindow();
             scene.getStylesheets().add(getClass().getResource("FXML/Style.css").toExternalForm()); // Add this line
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             primaryStage.setScene(scene);
             primaryStage.show();
-            return loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 
     @FXML
-    void backButtonPressed(ActionEvent event) {
-        changeScene("FXML/mainMenu.fxml");
-    }
-
-    @FXML
     void easyButtonPressed(ActionEvent event) {
-        SudokuGridController controller = (SudokuGridController) changeScene("FXML/sudokuGrid.fxml");
-        controller.init(0);
+        changeScene("FXML/sudokuGrid.fxml", 0);
     }
 
     @FXML
     void mediumButtonPressed(ActionEvent event) {
-        SudokuGridController controller = (SudokuGridController) changeScene("FXML/sudokuGrid.fxml");
-        controller.init(1);
+        changeScene("FXML/sudokuGrid.fxml", 1);
     }
 
     @FXML
     void hardButtonPressed(ActionEvent event) {
-        SudokuGridController controller = (SudokuGridController) changeScene("FXML/sudokuGrid.fxml");
-        controller.init(2);
+        changeScene("FXML/sudokuGrid.fxml", 2);
     }
 
+    private void changeScene(String fxmlFile, int difficulty) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) easyButton.getScene().getWindow();
+            primaryStage.setScene(scene);
+
+            // Get the controller instance and initialize if necessary
+            if (fxmlFile.equals("FXML/sudokuGrid.fxml")) {
+                SudokuGridController controller = loader.getController();
+                controller.init(difficulty);
+            }
+
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

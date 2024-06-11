@@ -107,7 +107,7 @@ public class SudokuGridController {
                 fileName = "hard";
                 break;
         }
-        fileName = String.format("Tables/%s.txt", fileName);
+        fileName = String.format("C:\\Users\\samei\\AP_LAB\\ApLab-By-Saba-Seyed-tabaei\\Sudoku\\Suduko\\src\\Tables/%s.txt", fileName);
         Font boldFont = Font.font("Arial", FontWeight.BOLD, 13);
         try {
             File file = new File(fileName);
@@ -142,17 +142,17 @@ public class SudokuGridController {
             collisions.remove(textField);
         }
 
-        ArrayList<TextField> newColissions = new ArrayList<TextField>();
+        ArrayList<TextField> newCollisions = new ArrayList<TextField>();
         // Each row and column
         if (!newText.equals("")) {
             for (int j = 0; j < rank; j++) {
                 if (j != currentColumn && textFields[currentRow][j].getText().equals(newText)) {
-                    newColissions.add(textFields[currentRow][j]);
+                    newCollisions.add(textFields[currentRow][j]);
                 }
             }
             for (int i = 0; i < rank; i++) {
                 if (i != currentRow && textFields[i][currentColumn].getText().equals(newText)) {
-                    newColissions.add(textFields[i][currentColumn]);
+                    newCollisions.add(textFields[i][currentColumn]);
                 }
             }
             // To hanlde repetition in 3x3 grids
@@ -161,14 +161,14 @@ public class SudokuGridController {
             for (int i = startRow; i < startRow + 3; i++) {
                 for (int j = startColumn; j < startColumn + 3; j++) {
                     if ((i != currentRow || j != currentColumn) && textFields[i][j].getText().equals(newText)) {
-                        newColissions.add(textFields[i][j]);
+                        newCollisions.add(textFields[i][j]);
                     }
                 }
             }
         }
 
-        if (newColissions.size() > 0) {
-            collisions.put(textField, newColissions);
+        if (newCollisions.size() > 0) {
+            collisions.put(textField, newCollisions);
         }
         applyColor(collisions.keySet(), "red");
         checkSolvedPuzzle();
