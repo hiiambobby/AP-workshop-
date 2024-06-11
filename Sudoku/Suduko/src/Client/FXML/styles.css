@@ -1,0 +1,27 @@
+.thick-right-line {
+    -fx-border-width: 1 5 1 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
+
+.thick-down-line {
+    -fx-border-width: 1 1 5 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
+
+.thick-right-down-line {
+    -fx-border-width: 1 5 5 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
+
+.default-line {
+    -fx-border-width: 1 1 1 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
