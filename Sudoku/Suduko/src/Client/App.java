@@ -17,7 +17,9 @@ public class App extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("FXML/mainMenu.fxml")));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("FXML/Style.css").toExternalForm()); // Add this line
-       // Image icon = new Image("img.png");
+       //Image icon = new Image("img.png");
+        primaryStage.getIcons().add(new Image(Client.class.getResourceAsStream("img.png")));
+
         primaryStage.setTitle("Sudoku Game");
 
         primaryStage.setScene(scene);
