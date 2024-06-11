@@ -9,9 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class MenuController {
+
+    @FXML
+    private Label header;
 
     @FXML
     private Button exitButton;
@@ -26,8 +30,10 @@ public class MenuController {
 
     @FXML
     void startSelected(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML/difSelect.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/Difficulty.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
+      //  scene.getStylesheets().add(getClass().getResource("FXML/Style.css").toExternalForm()); // Add this line
         Stage primaryStage = (Stage) startButton.getScene().getWindow();
         primaryStage.setScene(scene);
         primaryStage.show();

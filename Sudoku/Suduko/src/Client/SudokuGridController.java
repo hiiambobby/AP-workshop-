@@ -238,6 +238,6 @@ public class SudokuGridController {
 
     @FXML
     void backButtonPressed(ActionEvent event) {
-        changeScene("FXML/difSelect.fxml");
+        changeScene("FXML/Difficulty.fxml");
     }
 }

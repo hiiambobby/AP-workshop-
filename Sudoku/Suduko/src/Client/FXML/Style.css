@@ -1,0 +1,78 @@
+.thick-right-line {
+    -fx-border-width: 1 5 1 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
+
+.thick-down-line {
+    -fx-border-width: 1 1 5 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
+
+.thick-right-down-line {
+    -fx-border-width: 1 5 5 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
+
+.default-line {
+    -fx-border-width: 1 1 1 1;
+    /* top right bottom left */
+    -fx-border-color: black;
+    /* color of the border */
+}
+/* Style.css */
+
+/* Yellow background */
+.yellow-background {
+    -fx-background-color: yellow;
+}
+
+/* Start button style */
+.root {
+    -fx-background-color: #f0e68c; /* Light goldenrod yellow */
+}
+
+/* Header style */
+#header {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8b4513; /* Saddle brown */
+    -fx-alignment: center;
+}
+
+/* Start button style */
+#startButton {
+    -fx-background-color: #2e8b57; /* Sea green */
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 5,0,0,1 );
+}
+
+/* Exit button style */
+#exitButton {
+    -fx-background-color: #b22222; /* Fire brick */
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 5,0,0,1 );
+}
+/* Difficulty button style */
+.difficulty-button {
+    -fx-background-color: #0078d4;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 40px;
+}
+
+/* Add more styles for other components as needed */

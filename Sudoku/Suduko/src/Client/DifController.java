@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+
 public class DifController {
 
     @FXML
@@ -20,10 +21,10 @@ public class DifController {
     private Button easyButton;
 
     @FXML
-    private Button hardButton;
+    private Button mediumButton;
 
     @FXML
-    private Button mediumButton;
+    private Button hardButton;
 
     private Object changeScene(String newScene) {
         try {
@@ -31,6 +32,7 @@ public class DifController {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage) backButton.getScene().getWindow();
+            scene.getStylesheets().add(getClass().getResource("FXML/Style.css").toExternalForm()); // Add this line
             primaryStage.setScene(scene);
             primaryStage.show();
             return loader.getController();
