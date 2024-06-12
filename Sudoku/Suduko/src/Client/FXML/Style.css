@@ -1,32 +1,60 @@
 .thick-right-line {
     -fx-border-width: 1 5 1 1;
     /* top right bottom left */
-    -fx-border-color: black;
+    -fx-border-color: #000000;
     /* color of the border */
+    -fx-border-radius: 5;
+    /* rounded corners */
+    -fx-padding: 5;
+    /* padding inside the cell */
 }
 
 .thick-down-line {
     -fx-border-width: 1 1 5 1;
     /* top right bottom left */
-    -fx-border-color: black;
+    -fx-border-color: #000000;
     /* color of the border */
+    -fx-border-radius: 5;
+    /* rounded corners */
+    -fx-padding: 5;
+    /* padding inside the cell */
 }
 
 .thick-right-down-line {
     -fx-border-width: 1 5 5 1;
     /* top right bottom left */
-    -fx-border-color: black;
+    -fx-border-color: #000000;
     /* color of the border */
+    -fx-border-radius: 5;
+    /* rounded corners */
+    -fx-padding: 5;
+    /* padding inside the cell */
 }
 
 .default-line {
     -fx-border-width: 1 1 1 1;
     /* top right bottom left */
-    -fx-border-color: black;
+    -fx-border-color: #000000;
     /* color of the border */
+    -fx-border-radius: 5;
+    /* rounded corners */
+    -fx-padding: 5;
+    /* padding inside the cell */
 }
-/* Style.css */
 
+/* Additional CSS for enhancing visual appeal */
+.sudoku-cell {
+    -fx-background-color: #f9f9f9;
+    /* light background color for cells */
+    -fx-font-size: 16px;
+    /* larger font size for better readability */
+    -fx-alignment: center;
+    /* center align the content */
+}
+#timerLabel{
+-fx-font-size: 5px;
+
+}
 /* Yellow background */
 .yellow-background {
     -fx-background-color: yellow;
@@ -68,21 +96,23 @@
 }
 /* Difficulty button style */
 .button-base {
-    -fx-background-color: #0078d4;
+   -fx-background-color: #2e8b57; /* Sea green */
     -fx-font-size: 16px;
     -fx-text-fill: white;
     -fx-pref-width: 150px;
     -fx-pref-height: 40px;
     -fx-alignment: center;
+     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 5,0,0,1 );
 }
 
 #backButton {
-    -fx-background-color: limeGreen;
+    -fx-background-color: #b22222; /* Fire brick */
     -fx-font-size: 14px;
     -fx-text-fill: white;
     -fx-pref-width: 100px;
     -fx-pref-height: 30px;
     -fx-alignment: center;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 5,0,0,1 );
 }
 
 

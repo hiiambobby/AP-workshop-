@@ -4,22 +4,18 @@ package Client;
 import java.net.Socket;
 import java.io.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.function.UnaryOperator;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.input.KeyCode;
@@ -28,6 +24,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class SudokuGridController {
 
@@ -41,6 +38,24 @@ public class SudokuGridController {
     @FXML
     private Button backButton;
 
+    @FXML
+    private Label timerLabel;
+
+    private Timeline timeline;
+    private int secondsPassed = 0;
+
+    private void startTimer() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateTimer()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void updateTimer() {
+        secondsPassed++;
+        int minutes = secondsPassed / 60;
+        int seconds = secondsPassed % 60;
+        timerLabel.setText(String.format("Time: %02d:%02d", minutes, seconds));
+    }
     public void init(int difficulty) {
         // Populate the puzzle grid with textFields
         for (int row = 0; row < rank; row++) {
@@ -76,6 +91,7 @@ public class SudokuGridController {
         // For 3x3 blocks
         addPuzzleStyle();
         createPuzzle(difficulty);
+        startTimer();
     }
 
     private void addPuzzleStyle() {
